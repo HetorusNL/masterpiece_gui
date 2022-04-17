@@ -6,55 +6,43 @@ from db_watcher import DBWatcher
 api = Flask(__name__)
 
 
+@api.route("/courses")
+def courses():
+    return jsonify(_vocabulary_db.get_courses())
+
+
+@api.route("/course/<string:co_id>")
+def course(co_id):
+    courses = _vocabulary_db.get_courses()
+    course = list(filter(lambda a: a["id"] == co_id, courses))
+    return jsonify(course)
+
+
+@api.route("/course/<string:co_id>/words")
+def course_words(co_id):
+    vocabulary = _vocabulary_db.get_vocabulary()
+    co_words = list(filter(lambda a: a["course"] == co_id, vocabulary))
+    return jsonify(co_words)
+
+
+@api.route("/course/<string:co_id>/word/<string:wo_id>")
+def course_word(co_id, wo_id):
+    vocabulary = _vocabulary_db.get_vocabulary()
+    co_words = list(filter(lambda a: a["course"] == co_id, vocabulary))
+    word = list(filter(lambda a: a["id"] == wo_id, co_words))
+    return jsonify(word)
+
+
 @api.route("/words")
-def all_words():
+def words():
     return jsonify(_vocabulary_db.get_vocabulary())
 
 
-@api.route("/word/id/<string:id>")
-def word_id(id):
+@api.route("/word/<string:wo_id>")
+def word(wo_id):
     vocabulary = _vocabulary_db.get_vocabulary()
-    res = list(filter(lambda a: a["id"] == id, vocabulary))
-    return jsonify(res)
-
-
-@api.route("/word/course/<string:id>")
-def word_course(id):
-    vocabulary = _vocabulary_db.get_vocabulary()
-    res = list(filter(lambda a: a["course"] == id, vocabulary))
-    return jsonify(res)
-
-
-@api.route("/course/<string:id>/search/word/<string:fields>/<path:query>")
-def search_course_word(id, fields, query):
-    vocabulary = _vocabulary_db.get_vocabulary()
-    course_vocabulary = list(filter(lambda a: a["course"] == id, vocabulary))
-    return _search_words(course_vocabulary, fields, query)
-
-
-@api.route("/search/word/<string:fields>/<path:query>")
-def search_word(fields, query):
-    vocabulary = _vocabulary_db.get_vocabulary()
-    return _search_words(vocabulary, fields, query)
-
-
-def _search_words(vocabulary, fields, query):
-    # distinguish between wildcard search (fields=*) and search in fields
-    wildcard_search = fields == "*"
-    fields = fields.split(",")
-
-    res = []
-    for entry in vocabulary:
-        querywords_found = 0
-        for queryword in query.split(" "):
-            for key in entry.keys() if wildcard_search else fields:
-                # search case-insensitive (and testing if key exists)
-                if key in entry and queryword.lower() in entry[key].lower():
-                    querywords_found += 1
-                    break
-        if querywords_found == len(query.split(" ")):
-            res.append(entry)
-    return jsonify(res)
+    word = list(filter(lambda a: a["id"] == wo_id, vocabulary))
+    return jsonify(word)
 
 
 if __name__ == "__main__":
@@ -62,7 +50,7 @@ if __name__ == "__main__":
 
     # initialize the vocabulary database
     _vocabulary_db = VocabularyDB(database_file)
-    _vocabulary_db.update_vocabulary()
+    _vocabulary_db.update()
 
     # initialize the DB watcher that updates the database on file system events
     _db_watcher = DBWatcher(database_file, _vocabulary_db)

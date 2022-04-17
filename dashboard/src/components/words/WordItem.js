@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const WordItem = ({ word: { id, dutch, english } }) => {
   return (
     <div className="card text-left">
-      <Link to={`/word/id/${id}`} className="text-dark">
+      <Link to={`word/${id}`} className="text-dark">
         <p>{dutch}</p>
         <p>{english}</p>
       </Link>

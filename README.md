@@ -13,13 +13,10 @@ The current API endpoint can be reached at: https://api.masterpiece.hetorus.nl/.
 Query all words  
 https://api.masterpiece.hetorus.nl/words  
 Query words with id='words-2'  
-https://api.masterpiece.hetorus.nl/word/id/words-2  
+https://api.masterpiece.hetorus.nl/word/words-2  
 Query words with course='sentences'  
-https://api.masterpiece.hetorus.nl/word/course/sentences  
-Query words with wildcard search query='ho' (matching any value in the returned JSON)  
-https://api.masterpiece.hetorus.nl/search/word/*/ho  
-Query words with search in dutch/english fields with query='ho'  
-https://api.masterpiece.hetorus.nl/search/word/dutch,english/ho
+https://api.masterpiece.hetorus.nl/word/course/sentences/words  
+searching is no longer supported on the API side, searching within the returned words for a course/chapter/all should be performed client-side.
 
 ## Dashboard
 
@@ -28,7 +25,7 @@ By default 'live search' is enabled, and every keystroke sends a 'search' API ca
 When 'live search' is disabled by clicking on the button, a manual search button is enabled to send the 'search' API call when clicked.
 When clicking on the results, a single result page is opened where the 'raw properties' are shown.
 'Search only in English/Dutch' is enabled by default.
-If this is enabled, only the 'dutch' and 'english' fields are searched instead of every field (including id, course, course_name, etc) by issuing a wildcard search.
+If this is enabled, only these specific fields (equivalent fields for courses and chapters) are searched instead of every field (including id, course, course_name, etc) by issuing a 'wildcard search'.
 The current dashboard is hosted at: https://masterpiece.hetorus.nl
 
 ## Scripts

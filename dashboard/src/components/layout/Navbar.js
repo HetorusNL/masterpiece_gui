@@ -25,8 +25,9 @@ const Navbar = ({ loading, title }) => {
       </div>
       <div style={{ display: "flex" }}>
         <Link to="/">Home</Link>
-        <Link to="/course/words">Words</Link>
-        <Link to="/course/sentences">Sentences</Link>
+        <Link to="/courses">Courses</Link>
+        <Link to="/course/words/words">Words</Link>
+        <Link to="/course/sentences/words">Sentences</Link>
         <Link to="/about">About</Link>
       </div>
     </nav>
