@@ -1,6 +1,11 @@
 # Masterpiece GUI
 
-Front-end for the masterpiece database; GUI and API.
+'Masterpiece' to view, search and study English words.  
+This is a front-end for the [VocJEM](https://github.com/HetorusNL/vocjem) data; dashboard and API.  
+Both the dashboard and API are available as docker containers:
+
+- https://hub.docker.com/r/hetorusnl/masterpiece-api
+- https://hub.docker.com/r/hetorusnl/masterpiece-dashboard
 
 ## API
 
@@ -8,7 +13,37 @@ The API uses python3 and flask to host the API server.
 The API returns a (potentially empty) list of results in JSON format.
 The current API endpoint can be reached at: https://api.masterpiece.hetorus.nl/.
 
+### Running the API
+
+Either run the API using the docker container mentioned above, or manually using the steps below.
+
+#### Installing poetry
+
+Install poetry: https://python-poetry.org/docs/
+
+Ensure poetry works by running:  
+`poetry --version`  
+Otherwise ensure that the location poetry is installed in, is added to the path.
+
+Configure poetry to create the virtualenvs in the project folder:  
+`poetry config virtualenvs.in-project true`
+
+#### Running the API
+
+```bash
+# go to the api directory
+cd api
+
+# install the required dependencies
+poetry install
+
+# run the API
+poetry run python3 main.py
+```
+
 ### Example queries
+
+_Make sure to change the `api.masterpiece.hetorus.nl` domain name when running the API locally_
 
 Query all words  
 https://api.masterpiece.hetorus.nl/words  
@@ -28,34 +63,58 @@ When clicking on the results, a single result page is opened where the 'raw prop
 If this is enabled, only these specific fields (equivalent fields for courses and chapters) are searched instead of every field (including id, course, course_name, etc) by issuing a 'wildcard search'.
 The current dashboard is hosted at: https://masterpiece.hetorus.nl
 
+### Running the Dashboard
+
+Either run the Dashboard using the docker container mentioned above, or manually using the steps/scripts below.
+
+### Configuring yarn
+
+```bash
+# if any of the below commands fail on permission errors, prefix them with sudo
+
+# remove yarn is previously present on the system
+sudo apt remove yarn
+
+# make sure that node.js >= 16.10 is installed
+
+# enable corepack
+corepack enable
+
+# update to the latest version
+yarn set version stable
+
+# install the dependencies of the project
+yarn install
+```
+
 ## Scripts
 
 ### Run the development server
 
-run the following command to run the dev server:  
+Run the following command to run the dev server:  
 `yarn start`  
-this starts the development server on `localhost:3000`
+This starts the development server on `localhost:3000`
 
 ### Run a build (without incrementing version number)
 
-run the following command to build the application:  
+Run the following command to build the application:  
 `yarn build`  
-this updates the version number (if changed in `package.json`) and builds the application
+This updates the version number (if changed in `package.json`) and builds the application
 
-### Run a build with version increment and git commit creation
+### Increment the version number of Vocya
 
-the Semantic Versioning, also known as "semver", is used:  
-version: `major.minor.patch`  
-run one of the following commands:  
+The Semantic Versioning, also known as "semver", is used:  
+Version: `major.minor.patch`  
+Run one of the following commands:  
 `yarn release-patch` // increments the `patch` number of the version  
 `yarn release-minor` // increments the `minor` number of the version  
-`yarn release-major` // increments the `major` number of the version  
-all these three commands also create a git commit and git tag with the message:  
-`v${npm_package_version}` (which is the major.minor.patch version)  
-these three commands also perform a push to the master branch on github and push the tags
+`yarn release-major` // increments the `major` number of the version
 
-### Deploy the newly generated version to the server
+After these commands are executed, make sure to create a tag with matching version number (e.g. matching `v${npm_package_version}`), and push this to the repository, e.g:  
+`git tag -a vX.Y.Z -m "vX.Y.Z"`  
+`git push --tags`  
+This causes the CI/CD to create a tagged docker image for both the API and the dashboard with this version number.
 
-run the following command to deploy the new version:  
-`yarn deploy`  
-this removes the previous build from the server and copies the build to the server
+## License
+
+MIT License, Copyright (c) 2023 Tim Klein Nijenhuis <tim@hetorus.nl>
