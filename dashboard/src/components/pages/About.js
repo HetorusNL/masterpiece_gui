@@ -14,7 +14,7 @@ const About = () => {
       });
   }, []);
 
-  // update the Vocjem database
+  // update the Masterpiece database
   const actionUpdateDatabase = async () => {
     setDbUpdateStatus("updating database...");
     const res = await apiUpdateDatabase();

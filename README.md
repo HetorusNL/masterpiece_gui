@@ -1,7 +1,7 @@
 # Masterpiece GUI
 
 'Masterpiece' to view, search and study English words.  
-This is a front-end for the [VocJEM](https://github.com/HetorusNL/vocjem) data; dashboard and API.  
+This is a front-end for the [Masterpiece DB](https://github.com/HetorusNL/masterpiece_db) data; dashboard and API.  
 Both the dashboard and API are available as docker containers:
 
 - https://hub.docker.com/r/hetorusnl/masterpiece-api
@@ -101,7 +101,7 @@ Run the following command to build the application:
 `yarn build`  
 This updates the version number (if changed in `package.json`) and builds the application
 
-### Increment the version number of Vocya
+### Increment the version number of Masterpiece
 
 The Semantic Versioning, also known as "semver", is used:  
 Version: `major.minor.patch`  

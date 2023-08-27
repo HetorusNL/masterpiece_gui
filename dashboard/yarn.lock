@@ -3464,6 +3464,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"async@npm:~0.2.7":
+  version: 0.2.10
+  resolution: "async@npm:0.2.10"
+  checksum: 9ea83419ba67dc4ecf42d4eb0d93ce0ac80a67cabb612f160ed096aef5d001e3184ec9e9be5d4dc39b2c51a34e2ae16f9b21d737068b0f615fccb4eea16d0138
+  languageName: node
+  linkType: hard
+
 "asynckit@npm:^0.4.0":
   version: 0.4.0
   resolution: "asynckit@npm:0.4.0"
@@ -4588,6 +4595,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"combined-stream@npm:~0.0.4":
+  version: 0.0.7
+  resolution: "combined-stream@npm:0.0.7"
+  dependencies:
+    delayed-stream: 0.0.5
+  checksum: 312bce22547da11c63cef1be38db208f71c05daf6b903b8b5d46038fa820a584852e0cef15a21b492726fbcffa91ce444001ca6a2f79a2159ce5589fd183b135
+  languageName: node
+  linkType: hard
+
 "commander@npm:^2.20.0":
   version: 2.20.3
   resolution: "commander@npm:2.20.3"
@@ -5283,6 +5299,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "dashboard@workspace:."
   dependencies:
+    version: ^0.1.2
     "@testing-library/jest-dom": ^5.11.4
     "@testing-library/react": ^11.1.0
     "@testing-library/user-event": ^12.1.10
@@ -5291,7 +5308,7 @@ __metadata:
     react-dom: ^17.0.2
     react-router-dom: ^5.3.0
     react-scripts: 4.0.3
-    web-vitals: ^1.0.1
+    web-vitals: ^3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5451,6 +5468,13 @@ __metadata:
     pify: ^4.0.1
     rimraf: ^2.6.3
   checksum: 521f7da44bd79da841c06d573923d1f64f423aee8b8219c973478d3150ce1dcc024d03ad605929292adbff56d6448bca60d96dcdd2d8a53b46dbcb27e265c94b
+  languageName: node
+  linkType: hard
+
+"delayed-stream@npm:0.0.5":
+  version: 0.0.5
+  resolution: "delayed-stream@npm:0.0.5"
+  checksum: 6fcd0961ac3315fff5d5a6c2ba9a4e92cfd00043499eb83b3c38d94531c611121e3f37181849a84d8cb4777750e560b0c1711efb6303ec289544ec2d3a46771f
   languageName: node
   linkType: hard
 
@@ -6862,6 +6886,17 @@ __metadata:
     combined-stream: ^1.0.8
     mime-types: ^2.1.12
   checksum: b019e8d35c8afc14a2bd8a7a92fa4f525a4726b6d5a9740e8d2623c30e308fbb58dc8469f90415a856698933c8479b01646a9dff33c87cc4e76d72aedbbf860d
+  languageName: node
+  linkType: hard
+
+"form-data@npm:~0.0.3":
+  version: 0.0.10
+  resolution: "form-data@npm:0.0.10"
+  dependencies:
+    async: ~0.2.7
+    combined-stream: ~0.0.4
+    mime: ~1.2.2
+  checksum: 2a59e59a1ec6e19460efbda5ca43568ea17c12ab2dd8e3fbb80b44a3b83315305dab3916dd456dc5a8896b86f8fe30c25b11e083d8cfff70b97e63d8af3ebfa1
   languageName: node
   linkType: hard
 
@@ -9751,6 +9786,13 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"mime@npm:~1.2.2, mime@npm:~1.2.7":
+  version: 1.2.11
+  resolution: "mime@npm:1.2.11"
+  checksum: 68248e74bd65db30d2b59c077cc8794e3caee1497fd7ca40efcf8797c4aea75dc9d5b05d1448fdfb3de09da0b894a47e90cde0985a0c5ec5d7d2305c36aa2c75
+  languageName: node
+  linkType: hard
+
 "mimic-fn@npm:^2.1.0":
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
@@ -12609,6 +12651,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"request@npm:2.12.0":
+  version: 2.12.0
+  resolution: "request@npm:2.12.0"
+  dependencies:
+    form-data: ~0.0.3
+    mime: ~1.2.7
+  checksum: 2d8025a30729146ff8657161ffa9c7b238dfc18356dabf252ff6282cc6c43d7cb8dc4ee21ec284093d49b7322e3001a9340f067c6ef783b802401e0515a6184a
+  languageName: node
+  linkType: hard
+
 "require-directory@npm:^2.1.1":
   version: 2.1.1
   resolution: "require-directory@npm:2.1.1"
@@ -14787,6 +14839,15 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"version@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "version@npm:0.1.2"
+  dependencies:
+    request: 2.12.0
+  checksum: 1659dd9aa3d58d370cad69a7be1fa4cf9cd8dec897dad7201cc108920e748e5cd1921e278ada5f7cfcb0537fce5f532b375a294e7cc46f3cf9da15bf4a0ad8c1
+  languageName: node
+  linkType: hard
+
 "vm-browserify@npm:^1.0.1":
   version: 1.1.2
   resolution: "vm-browserify@npm:1.1.2"
@@ -14856,10 +14917,10 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"web-vitals@npm:^1.0.1":
-  version: 1.1.2
-  resolution: "web-vitals@npm:1.1.2"
-  checksum: 92071029089277166e11141b735831d9011e85737d32c1360034676db898ab0ca95f19041ee01904f2189ad6e711b9da6b17567e4831290a429a586c98bc573f
+"web-vitals@npm:^3.1.1":
+  version: 3.4.0
+  resolution: "web-vitals@npm:3.4.0"
+  checksum: 6baac515035a82f05623aa6592654af3b5fd8ca0359e368388e147c1376ca00e5f1b2256130f8e96249ee793a437b55615db21ae699d6d400bf2800f676e0114
   languageName: node
   linkType: hard
 
