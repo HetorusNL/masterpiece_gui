@@ -1,6 +1,6 @@
 {
   "name": "dashboard",
-  "version": "1.0.4",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -44,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.0.2"
+  "packageManager": "yarn@3.6.3"
 }
