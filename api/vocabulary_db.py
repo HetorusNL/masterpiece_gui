@@ -1,12 +1,13 @@
 import json
-from typing import List
+import requests
 
 
 class VocabularyDB:
-    def __init__(self, database_file: str):
-        self.courses: List[dict[str, str]] = []
-        self.vocabulary: List[dict[str, str]] = []
-        self.database_file = database_file
+    DATABASE_URL = "https://raw.githubusercontent.com/HetorusNL/masterpiece_db/master/dictionary.json"
+
+    def __init__(self):
+        self.courses: list[dict[str, str]] = []
+        self.vocabulary: list[dict[str, str]] = []
 
     def get_courses(self):
         return self.courses
@@ -15,14 +16,15 @@ class VocabularyDB:
         return self.vocabulary
 
     def update(self):
-        self.courses = self._resolve_type("courses")
-        self.vocabulary = self._resolve_type("vocabulary")
+        print("Updating the database...")
+        result = requests.get(self.DATABASE_URL)
+        database = json.loads(result.content.decode("utf-8"))
+        self.courses = self._resolve_type(database, "courses")
+        self.vocabulary = self._resolve_type(database, "vocabulary")
 
-    def _resolve_type(self, type_name) -> "List[dict[str, str]]":
-        with open(self.database_file) as f:
-            dictionary: dict = json.load(f)
-        entries: List[dict[str, str]] = dictionary[type_name]
-        lut: dict = dictionary["lut"]
+    def _resolve_type(self, database: dict, type_name: str) -> list[dict[str, str]]:
+        entries: list[dict[str, str]] = database[type_name]
+        lut: dict = database["lut"]
         lut_keys = lut.keys()
         # resolve the LUT it might be better to do this after (optional)
         # filtering, but we're caching this function's output anyways
@@ -30,7 +32,7 @@ class VocabularyDB:
             new_kvs = {}
             for key in entry.keys():
                 if key in lut_keys:
-                    lutval = dictionary.get(lut[key])
+                    lutval = database.get(lut[key])
                     if not lutval:
                         continue
                     res = list(filter(lambda a: a["id"] == entry[key], lutval))
